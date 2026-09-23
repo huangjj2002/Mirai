@@ -1,0 +1,5 @@
+patient_id,exam_id,laterality,view,file_path,years_to_cancer,years_to_last_followup,split_group,source_dicom_path,device_model
+example_patient,example_exam,R,CC,/replace/with/png16/R_CC.png,100,2,train,,Selenia Dimensions
+example_patient,example_exam,R,MLO,/replace/with/png16/R_MLO.png,100,2,train,,Selenia Dimensions
+example_patient,example_exam,L,CC,/replace/with/png16/L_CC.png,100,2,train,,Selenia Dimensions
+example_patient,example_exam,L,MLO,/replace/with/png16/L_MLO.png,100,2,train,,Selenia Dimensions

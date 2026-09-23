@@ -1,0 +1,9 @@
+{
+  "image_metadata_csv": "/replace/with/EMBED/tables/metadata_all_cohort_with_ROI_HITI.csv",
+  "dicom_column": "anon_dicom_path",
+  "strip_prefix": "/replace/with/old/dicom/root",
+  "dicom_root": "/replace/with/current/dicom/root",
+  "output_dir": "../outputs/mirai_png",
+  "dcmtk": "dcmj2pnm",
+  "limit": 16
+}

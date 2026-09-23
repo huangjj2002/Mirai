@@ -1,0 +1,3 @@
+# In addition, install DCMTK (dcmj2pnm built with PNG support).
+pydicom==3.0.1
+Pillow==10.4.0

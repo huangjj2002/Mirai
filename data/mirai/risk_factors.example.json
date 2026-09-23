@@ -1,0 +1,11 @@
+[
+  {
+    "patient_id": "example_patient",
+    "exam_id": "example_exam",
+    "factors": {
+      "age": [0, 0, 1, 0, 0, 0],
+      "density": [0, 1, 0, 0],
+      "binary_family_history": null
+    }
+  }
+]

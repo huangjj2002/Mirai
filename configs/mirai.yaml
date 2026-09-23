@@ -1,0 +1,42 @@
+# Paths are relative to THIS config file. Input PNGs are already converted from presentation DICOM.
+seed: 2026
+device: cuda
+threads: 4
+num_workers: 0
+output_dir: ../outputs/mirai
+data:
+  metadata_csv: ../data/mirai/metadata.csv
+  risk_factors_json: null
+  # Optional EMBED table; join through source_dicom_path, not guessed PNG names.
+  image_metadata_csv: null
+  # Optional clinical table: only unique, consistent index-exam age/density are mapped.
+  clinical_csv: null
+image:
+  size: [1664, 2048]  # width,height
+  mean: null         # computed on TRAIN images only by check-data --compute-stats
+  std: null
+model:
+  hidden_dim: 512
+  num_heads: 8
+  pool: Simple_AttentionPool
+stage1:
+  imagenet: true
+  epochs: 15
+  batch_size: 2
+  accumulate: 16
+  lr: 0.0001
+  weight_decay: 0.00005
+  dropout: 0.0
+  rf_weight: 0.2
+  lr_patience: 10
+stage2:
+  epochs: 15
+  batch_size: 64
+  accumulate: 1
+  lr: 0.001
+  weight_decay: 0.00005
+  dropout: 0.0
+  rf_weight: 0.2
+  adv_weight: 1.0
+  adv_steps: 3
+  lr_patience: 10

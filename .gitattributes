@@ -1,0 +1,9 @@
+* text=auto
+*.py text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.md text eol=lf
+*.txt text eol=lf
+*.csv text eol=lf
+# The vendored manifest hashes exact bytes; preserve upstream-copy line endings.
+/mirai_training/vendor/** -text
