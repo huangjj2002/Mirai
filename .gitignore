@@ -8,6 +8,7 @@
 !/main.py
 !/requirements-mirai.txt
 !/requirements-conversion.txt
+!/requirements-data.txt
 !/mirai_training/
 !/configs/
 /configs/*

@@ -23,6 +23,20 @@ def parser():
     convert.add_argument('--dcmtk')
     convert.add_argument('--limit', type=int, help='Maximum candidate images attempted; default 16, 0 means all')
     convert.add_argument('--dry-run', action='store_true', help='Check DICOM headers/paths without conversion')
+    pilot=sub.add_parser('prepare-pilot', help='Select complete patient-disjoint exams and prepare outcome review')
+    pilot.add_argument('--clinical-csv', required=True)
+    pilot.add_argument('--image-metadata-csv', required=True)
+    pilot.add_argument('--dicom-root', required=True)
+    pilot.add_argument('--strip-prefix', default='/mnt/NAS2/mammo/anon_dicom')
+    pilot.add_argument('--output-dir', default='outputs/pilot200')
+    pilot.add_argument('--patients', type=int, default=200)
+    pilot.add_argument('--positive-candidates', type=int, default=50)
+    pilot.add_argument('--seed', type=int, default=2026)
+    pilot.add_argument('--label-policy', choices=['review', 'recorded-screening'], default='review',
+                       help='Explicit opt-in to provisional labels from recorded cancer and >=5-year negative screening')
+    finish=sub.add_parser('finalize-pilot', help='Create training inputs from explicitly reviewed outcomes and converted PNGs')
+    finish.add_argument('--pilot-dir', default='outputs/pilot200')
+    finish.add_argument('--outcomes-csv', required=True)
     for command in ('check-data','train','extract-features','evaluate','smoke-test'):
         s=sub.add_parser(command)
         s.add_argument('--config',default=str(Path(__file__).resolve().parent.parent/'configs/mirai.yaml'))
@@ -80,6 +94,10 @@ def main(argv=None):
             args=conversion_args(args)
             from .dicom_conversion import convert_table
             convert_table(args)
+            return 0
+        if args.command in ('prepare-pilot', 'finalize-pilot'):
+            from .pilot import prepare_pilot, finalize_pilot
+            (prepare_pilot if args.command=='prepare-pilot' else finalize_pilot)(args)
             return 0
         from .config import load_config, torch_load
         from .engine import check_data, evaluate, extract_features, train_stage
